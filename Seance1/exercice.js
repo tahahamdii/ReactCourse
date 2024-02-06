@@ -13,3 +13,5 @@ let total = students.map((student) => {
 }
 ).filter((mark) => mark > 50).reduce((acc, mark) => acc + mark, 0)
 console.log(total)
+
+let words = ["hello", "goodbye", "the", "Antarctica", "a", "ANIMAL", "dog", "CAT", "zebra", "AAA"];
