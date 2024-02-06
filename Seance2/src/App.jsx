@@ -1,35 +1,72 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+
+import React, { useEffect, useState } from 'react';
+import { findLongestWord, countOccurrences, calculateTotal, addEntry } from './es6';
+import { search } from './function';
+
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [longestWord, setLongestWord] = useState(null);
+  const [occurrences, setOccurrences] = useState(null);
+  const [total, setTotal] = useState(null);
+  const [item, setItem] = useState(null);
+
+  useEffect(() => {
+    const words = ['hello', 'world', 'programming', 'react'];
+    setLongestWord(findLongestWord(words));
+
+    const arr = [['apple', 'banana'], ['apple', 'banana', 'cherry']];
+    setOccurrences(countOccurrences(arr));
+
+    const grades = [45, 55, 60, 70];
+    setTotal(calculateTotal(grades));
+
+    addEntry({ name: 'John', age: 25 });
+    setItem(search(Tab, 1));
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="App">
+      <header className="App-header">
+        <h1>Longest Word: {longestWord}</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>Word</th>
+              <th>Occurrences</th>
+            </tr>
+          </thead>
+          <tbody>
+            {occurrences && Object.entries(occurrences).map(([word, count]) => (
+              <tr key={word}>
+                <td>{word}</td>
+                <td>{count}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <h1>Total Grades: {total}</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Age</th>
+            </tr>
+          </thead>
+          <tbody>
+            {item && (
+              <tr>
+                <td>{item.id}</td>
+                <td>{item.name}</td>
+                <td>{item.age}</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </header>
+    </div>
+  );
 }
 
-export default App
+export default App;
