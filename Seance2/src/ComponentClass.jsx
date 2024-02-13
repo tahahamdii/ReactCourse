@@ -12,4 +12,6 @@ class ComponentClass extends Component {
     }
 }
  
+
 export default ComponentClass;
+
